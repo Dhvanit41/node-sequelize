@@ -9,6 +9,33 @@ const connection = new Sequelize("node_orm", "root", "", {
   dialect: "mysql",
 });
 
+const user = connection.define("tbl_users",{
+  id:{
+    type:Sequelize.INTEGER,
+    allowNull :false,
+    primaryKey:true,
+    autoIncrement:true
+  },
+  name:{
+    type:Sequelize.STRING,
+    allowNull:false
+  },
+  email:{
+    type:Sequelize.STRING,
+  },
+  rollNo:{
+    type:Sequelize.INTEGER,
+  },
+  status:{
+    type:Sequelize.ENUM("1","0"),
+    default:"1"
+  }
+},{
+  modelName:"User"
+}
+)
+connection.sync()
+
 connection
  .authenticate()
  .then(() => {
